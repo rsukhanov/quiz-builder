@@ -13,11 +13,7 @@ export class QuizService {
   async getAllQuizzes() {
     return await this.prismaService.quiz.findMany({
       include: {
-        questions: {
-          include: {
-            choices: true,
-          },
-        },
+        questions: true
       },
     });
   }
@@ -26,11 +22,7 @@ export class QuizService {
     return await this.prismaService.quiz.findUnique({
       where: { id },
       include: {
-        questions: {
-          include: {
-            choices: true,
-          },
-        },
+        questions: true
       },
     });
   }

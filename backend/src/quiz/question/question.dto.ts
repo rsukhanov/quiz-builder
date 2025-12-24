@@ -1,12 +1,25 @@
-import { Type } from "class-transformer";
-import { IsString, IsNotEmpty, IsEnum, IsArray, ValidateNested } from "class-validator";
-import { CreateChoiceDto } from "./choice/choice.dto";
+import { IsString, IsNotEmpty, IsEnum, IsArray } from "class-validator";
 
 export enum QuestionType {
   MULTIPLE_CHOICE = 'MULTIPLE_CHOICE',
   TRUE_FALSE = 'TRUE_FALSE',
   TEXT_ANSWER = 'TEXT_ANSWER'
 }
+
+export interface TextChoice {
+  text: string;
+}
+
+export interface TrueFalseChoice {
+  isCorrect: boolean;
+}
+
+export interface MultipleChoice {
+  text: string;
+  isCorrect: boolean;
+}
+
+export type ChoiceData = TextChoice | TrueFalseChoice | MultipleChoice[];
 
 export class CreateQuestionDto {
   @IsString()
@@ -17,7 +30,5 @@ export class CreateQuestionDto {
   type: QuestionType;
 
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateChoiceDto)
-  choices: CreateChoiceDto[];
+  choices: ChoiceData[];
 }

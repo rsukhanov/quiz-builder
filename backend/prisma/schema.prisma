@@ -26,20 +26,9 @@ model Question {
 
   type      String
 
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quiz      Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
   quizId    Int
 
-  choices   Choice[]
+  choicesJSON   String?
   createdAt DateTime @default(now())
-}
-
-model Choice {
-  id         Int      @id @default(autoincrement())
-  text       String
-  isCorrect  Boolean
-
-  question   Question @relation(fields: [questionId], references: [id])
-  questionId Int
-  
-  createdAt  DateTime @default(now())
 }
