@@ -25,18 +25,3 @@ npm run dev
 -Fill in the question text and correct answer.  
 -Click "Save Quiz".
 
-
-
-Copyright (c) 2025 [ТВОЕ ИМЯ И ФАМИЛИЯ]
-
-All rights reserved.
-
-The computer program acts as a portfolio project. 
-The code is available for viewing and evaluation purposes only.
-
-You are NOT allowed to:
-- Use this code for commercial purposes.
-- Modify, distribute, or sub-license this code.
-- Use this code in a private or public production environment.
-
-For permissions beyond the scope of this license, please contact: [ТВОЙ EMAIL]
