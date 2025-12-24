@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// enum QuestionType {
+//   MULTIPLE_CHOICE
+//   TRUE_FALSE
+//   TEXT_ANSWER
+// }
+
+model Quiz {
+  id       Int      @id @default(autoincrement())
+  title     String
+  questions Question[]
+  createdAt DateTime @default(now())
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  text      String
+
+  type      String
+
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    Int
+
+  choices   Choice[]
+  createdAt DateTime @default(now())
+}
+
+model Choice {
+  id         Int      @id @default(autoincrement())
+  text       String
+  isCorrect  Boolean
+
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+  
+  createdAt  DateTime @default(now())
+}
