@@ -1,0 +1,21 @@
+{
+  "name": "quiz-builder-monorepo",
+  "description": "Quiz builder application monorepo containing frontend and backend services. Created with Next.js and Node.js. Created by Roman Sukhanov.",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    
+    "env:setup": "node -e \"require('fs').writeFileSync('backend/.env', 'DATABASE_URL=\\\"file:./dev.db\\\"')\"",
+    
+    "db:init": "cd backend && npx prisma migrate dev --name init",
+    
+    "init-project": "npm run install:all && npm run env:setup && npm run db:init",
+
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && npm run start:dev",
+    "start:frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

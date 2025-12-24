@@ -5,16 +5,17 @@ import { quizApi } from "@/lib/api/main.api";
 import { ReadOnlyQuestion } from "@/lib/components/read-question.question";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function QuizDetailPage({ params }: PageProps) {
   let quiz;
-
+  
+  const { id } = await params;
   try {
-    quiz = await quizApi.getById(Number(params.id));
+    quiz = await quizApi.getById(Number(id));
   } catch (error) {
     console.error("Error fetching quiz:", error);
     return notFound(); 
