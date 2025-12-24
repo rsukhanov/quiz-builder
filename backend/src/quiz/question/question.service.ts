@@ -11,7 +11,7 @@ export class QuestionService {
       data: {
         text: question.text,
         type: question.type,
-        choicesJSON: JSON.stringify(question.choices),
+        choices: JSON.stringify(question.choices),
         quizId,
       },
     });

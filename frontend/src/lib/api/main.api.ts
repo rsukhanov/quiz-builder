@@ -24,7 +24,26 @@ export const quizApi = {
     .get(QUIZ_ENDPOINT),
 
   getById: (id: number): Promise<Quiz> => api
-    .get(`${QUIZ_ENDPOINT}/${id}`),
+    .get(`${QUIZ_ENDPOINT}/${id}`)
+    .then((data: any) => {
+      const quiz: any = data;
+      if (quiz && Array.isArray(quiz.questions)) {
+        quiz.questions = quiz.questions.map((q: any) => {
+          try {
+            return {
+              ...q,
+              choices: JSON.parse(q.choices)
+            };
+          } catch (e) {
+            console.error("JSON Parse error for question:", q.id, e);
+            return { ...q, choices: [] };
+          }
+          return q;
+        });
+      }
+
+        return quiz as Quiz;
+    }),
 
   create: (data: CreateQuizSchema): Promise<Quiz> => api
     .post(QUIZ_ENDPOINT, data),

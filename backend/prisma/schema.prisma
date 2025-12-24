@@ -29,6 +29,6 @@ model Question {
   quiz      Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
   quizId    Int
 
-  choicesJSON   String?
+  choices   String?
   createdAt DateTime @default(now())
 }
